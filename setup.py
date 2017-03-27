@@ -19,7 +19,7 @@ setup(
   long_description = long_description,
   author = 'Vayn & lilydjwg',
   author_email = 'vayn@vayn.de & lilydjwg@gmail.com',
-  url = 'http://p.vim-cn.com',
+  url = 'http://p.vim-cn.com/t',
   download_url = 'https://github.com/Vim-cn/vinergy',
   license = 'GPL3',
   install_requires = ['tornado>=3.1', 'pymongo', 'pygments'],

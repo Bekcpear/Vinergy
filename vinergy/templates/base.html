@@ -2,11 +2,14 @@
 <html lang="en">
 <meta charset="UTF-8" />
 <title>Vinergy - CLI Pastebin within VimEnergy</title>
-<link rel='shortcut icon' href="/static/favicon.ico" type="image/x-icon" />
-<link type="text/plain" rel="author" href="/static/humans.txt" />
+<link rel='shortcut icon' href="/t/static/favicon.ico" type="image/x-icon" />
+<link type="text/plain" rel="author" href="/t/static/humans.txt" />
 
-{% if path != '/' %}
-<link rel="stylesheet" href="/static/code.css" type="text/css" />
+{% if path != '/t' %}
+<link rel="stylesheet" href="/t/static/highlight/styles/github.css" type="text/css" />
+<link rel="stylesheet" href="/t/static/code.css" type="text/css" />
+<script src="/t/static/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <!--[if lt IE 10]>
 <script type="text/javascript">
 if(confirm('你的浏览器不支持显示本页内容，点击“确定”去下载火狐，点击“取消”下载谷歌浏览器。'){

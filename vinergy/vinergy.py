@@ -24,8 +24,8 @@ staticdir = os.path.join(topdir, 'static')
 
 ### URL mappings
 routers = (
-  (r'/', handlers.Index),
-  (r'/(.*)', handlers.ShowCode),
+  (r'/t', handlers.Index),
+  (r'/t/(.*)', handlers.ShowCode),
 )
 
 def setup():
@@ -34,7 +34,7 @@ def setup():
   b52.PAD = PAD
 
 def main():
-  define("port", default=8000, help="run on the given port", type=int)
+  define("port", default=1718, help="run on the given port", type=int)
   define("address", default='', help="run on the given IP address", type=str)
   define("debug", default=False, help="debug mode", type=bool)
 

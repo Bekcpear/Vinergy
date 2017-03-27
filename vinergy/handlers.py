@@ -39,52 +39,23 @@ class ShowCode(BaseHandler):
     if codeid.rfind('/') != -1:
       # URL looks like wuitE/vim
       codeid, syntax = codeid.rsplit('/', 1)
-      syntax = syntax.lower()
-    else:
-      syntax = None
+    syntax = None
     doc = model.get_code_by_name(codeid)
     if not doc:
       raise HTTPError(404, codeid + ' not found')
     codes = dict(doc['content'])
 
-    if syntax is None:
-      syntax = self.request.query.lower()
-
-    if not syntax:
-      self.set_header('Content-Type', 'text/plain')
-      self.finish(codes['text'])
-      return
-
-    # NOTE: syntax may fall back to text
-    syntax = util.norm_filetype(syntax)
-
     is_terminal = util.is_terminal(self.request.headers.get('User-Agent'))
-    if is_terminal and syntax != 'text':
-      syntax_ = 't_' + syntax
-    else:
-      syntax_ = syntax
-    code = codes.get(syntax_, None)
-
-    # If there is rendered code in database already, just return it
-    if code is not None:
-      if is_terminal:
-        self.finish(code)
-      else:
-        self.render('code.html', code=code)
-      return
-
-    # Otherwise we should render text first
-    code = codes['text']
+    #self.set_header('Content-Type', 'text/plain')
     if is_terminal:
       # term
       r = util.render(code, 'TerminalFormatter', syntax)
-      model.update_code(codeid, r, syntax_)
       self.finish(r)
     else:
       # web
-      r = util.render(code, 'HtmlFormatter', syntax)
-      model.update_code(codeid, r, syntax_)
-      self.render('code.html', code=r)
+      r = util.render(codes['text'], 'HtmlFormatter', syntax)
+      self.render('codeh.html', code=r)
+      return
 
 class Index(BaseHandler):
   def get(self):
@@ -110,7 +81,7 @@ class Index(BaseHandler):
         epoch = time.mktime(datetime.datetime.utctimetuple(
           datetime.datetime.utcnow()))
         model.insert_code(oid, name, code, count, epoch)
-      self.finish('%s://%s/%s\n' % (self.request.protocol, self.request.host, name))
+      self.finish('%s://%s/t/%s\n' % (self.request.protocol, self.request.host, name))
     except MissingArgumentError:
       self.set_status(400)
       self.finish('Oops. Please Check your command.\n')
