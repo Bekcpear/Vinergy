@@ -1,19 +1,35 @@
+body, pre {
+  margin: 0;
+  background: #f8f8f8;
+}
+
 .hljs {
   line-height: 20px;
   font-size: 13px;
   font-family: "Roboto Mono", monospace, "Noto Sans Mono CJK TC", "Noto Sans Mono CJK SC", Arial !important;
+  overflow-x: initial;
 }
 
 .linenos {
   padding: 0 5px !important;
 }
 
+.linenos a:hover {
+  color: #666666 !important;
+}
+
 .linenos a {
-  display: inline-block;
+  display: block;
+  float: left;
+  height: 20px;
+  clear: left;
   vertical-align: middle;
   width: 100%;
   text-align: right;
   text-decoration: none;
+  color: #999999 !important;
+  transition-property: color;
+  transition-duration: 0.35s;
 }
 
 .linenos a span:hover {
@@ -31,6 +47,9 @@ tbody .code {
 }
 
 .line {
-  display: inline-block;
+  display: block;
+  float: left;
+  height: 20px;
+  clear: left;
   vertical-align: middle;
 }
